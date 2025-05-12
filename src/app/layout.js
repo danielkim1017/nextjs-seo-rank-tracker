@@ -3,6 +3,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import LoginScreen from "./LoginScreen";
+import Header from "./Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +22,6 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  console.log({session});
   return (
     <html lang="en">
       <body
@@ -31,7 +31,10 @@ export default async function RootLayout({ children }) {
         <LoginScreen/>
       )}
       {session && (
-        <div>{children}</div>
+        <>
+          <Header />
+          {children}
+        </>
       )}
       </body>
     </html>
