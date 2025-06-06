@@ -95,7 +95,7 @@ The project is being developed in the following stages:
 - OAuth authentication flows and secure session management  
 - Scheduling jobs with cron in a production-ready app  
 - Real-time data visualization and UI responsiveness  
-- Deploying scalable apps on AWS or similar platforms
+- Deploying scalable apps using Vercel (CI/CD)
 
 ---
 
