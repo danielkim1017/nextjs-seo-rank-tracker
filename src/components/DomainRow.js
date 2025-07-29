@@ -1,5 +1,5 @@
 export default function DomainRow() {
-    const keywords = ['github', 'git', 'copilot', 'git share code', 'free git repos'];
+    const keywords = ['github', 'git', 'copilot', 'git share code', 'free git repos',];
     return (
         <div className="flex gap-2 bg-white border border-blue-200 border-b-4 p-4 rounded-lg items-center my-3">
           <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" className="h-12"/>
