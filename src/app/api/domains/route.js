@@ -2,41 +2,17 @@ import { Domain } from "@/models/domain";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import axios from "axios";
 import DomParser from "dom-parser";
-
-async function getIconUrl () {
-    const response = await axios.get(`https://` +domain);
-    const parser = new DOMParser();
-    const parsedHTML = parser.parseFromString(response.data, 'text/html'); 
-    const links = parsedHTML.getElementsByTagName('link');
-    let href = '';
-    for (const link of links) {
-        const rel = link.attributes?.find(a => a.name === 'rel')?.value || '';
-        if (rel.includes('icon')) {
-        href = link.attributes?.find(a => a.name === 'href')?.value;
-        }
-    }
-    if (href.includes('://')) {
-        return href;
-    } else {
-        return `https://` + domain + href;
-    }
-}
 
 export async function POST(req) {
     const data = await req.json();
-    mongoose.connect(process.env.MONGODB_URI)
+    mongoose.connect(process.env.MONGODB_URI);
     const session = await getServerSession(authOptions);
-    let icon = null;
-    try {
-        icon = await getIconUrl(data?.domain)
-    } catch(e) {
-        console.error(e);
-    }
-    const doc = await Domain.create({
+    await Domain.create({
         domain: data?.domain,
         owner: session?.user?.email,
-        icon,
-    });
-    return Response.json(doc);
+        icon: '',
+    })
+    return Response.json(true);
 }
