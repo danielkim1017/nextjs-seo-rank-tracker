@@ -4,7 +4,8 @@ import NewDomainForm from "@/components/NewDomainForm";
 import { getServerSession } from "next-auth";
 import { Span } from "next/dist/trace";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { Domain } from "@/models/domain";
+import { Domain } from "@/models/Domain";
+
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
